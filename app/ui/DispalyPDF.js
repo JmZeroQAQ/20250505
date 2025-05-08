@@ -2,6 +2,7 @@
 
 import { pdfjs, Document, Page } from 'react-pdf';
 import Loading from './Loading';
+import OperateMenu from './OperateMenu.js';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
@@ -10,7 +11,7 @@ const options = {
   standardFontDataUrl: '/standard_fonts/',
 };
 
-export default function DisplayPDF({ file, width, pages, setPages }) {
+export default function DisplayPDF({ file, setFile, width, setWidth, pages, setPages }) {
   function onDocumentLoadSuccess({ numPages }) {
     setPages(Array(numPages).fill(0));
   }
@@ -20,6 +21,27 @@ export default function DisplayPDF({ file, width, pages, setPages }) {
     newPages[idx] += 90;
     newPages[idx] %= 360;
     setPages(newPages);
+  }
+
+  async function handleClickDownload() {
+    const newFile = await rotatePDF(file, pages);
+    const blob = new Blob([newFile], { type: 'application/pdf' });
+
+    // 创建下载链接
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = file.name; // 设置下载文件名
+
+    // 触发下载
+    document.body.appendChild(a);
+    a.click();
+
+    // 清理
+    setTimeout(() => {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 100);
   }
 
   const pageList = pages.map((rotate, idx) => {
@@ -45,8 +67,13 @@ export default function DisplayPDF({ file, width, pages, setPages }) {
   return (
     <div className="mt-5">
       <Document file={file} width={500} onLoadSuccess={onDocumentLoadSuccess} options={options} loading={<Loading />} >
+        <OperateMenu setFile={setFile} setPages={setPages} width={width} setWidth={setWidth} />
         <div className='flex flex-wrap justify-center'>
           {pageList}
+        </div>
+
+        <div className="flex justify-center mt-5">
+          <button onClick={handleClickDownload} className="p-2 cursor-pointer font-semibold bg-[#FF612F] text-white rounded">Download</button>
         </div>
       </Document>
     </div>

@@ -23,7 +23,7 @@ export default function OperateMenu({ setFile, setPages, width, setWidth }) {
   }
 
   return (
-    <div className="flex justify-center items-center space-x-3">
+    <div className="flex justify-center items-center space-x-3 mb-5">
       <button className="p-2 cursor-pointer font-semibold bg-[#FF612F] text-white rounded" onClick={handleClickRotate}>Rotate All</button>
       <button className="p-2 cursor-pointer font-semibold bg-black text-white rounded" onClick={handleClickRemove}>Remove PDF</button>
       <button

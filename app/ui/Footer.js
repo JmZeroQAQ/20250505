@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="mx-auto max-w-7xl px-6 pb-8 mt-8 sm:mt-12 lg:px-8 lg:mt-16 border-t border-gray-900/10 pt-16">
       <div className="xl:grid xl:grid-cols-3 xl:gap-8">
         <div className="space-y-8">
-          <Image className="h-7" width={28} height={28} src="/favicon.icon" alt="PDF.ai logo" />
+          <Image className="h-7" width={28} height={28} src="/logo.ico" alt="PDF.ai logo" />
           <div className="text-sm leading-6 text-gray-600">
             Chat with any PDF: ask questions, get summaries, find information, and
             more.
