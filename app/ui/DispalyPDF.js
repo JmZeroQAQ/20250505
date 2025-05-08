@@ -24,16 +24,14 @@ export default function DisplayPDF({ file, width, pages, setPages }) {
 
   const pageList = pages.map((rotate, idx) => {
     return (
-      <div style={{ width: width }} className='m-3 relative flex-none cursor-pointer select-none' onClick={() => handleClick(idx)} key={`page_${idx + 1}`}>
+      <div className='m-3 relative flex-none cursor-pointer select-none' onClick={() => handleClick(idx)} key={`page_${idx + 1}`}>
         <div className='overflow-hidden transition-transform'>
-          <div className='flex flex-col justify-between items-center shadow-md p-3 bg-white hover:bg-gray-50'>
+          <div style={{ width: width, height: width * 1.44 }} className='flex flex-col justify-between items-center shadow-md p-3 bg-white hover:bg-gray-50'>
             <Page
               className={`diy-rotate-${rotate} transition duration-150 ease-in-out`}
               pageNumber={idx + 1}
-              renderMode='canvas'
               renderTextLayer={false}
               renderAnnotationLayer={false}
-              width={width}
               loading={""}
             />
             <div className='text-center shrink-0 text-xs italic overflow-hidden text-ellipsis whitespace-nowrap'>{idx + 1}</div>
@@ -46,7 +44,7 @@ export default function DisplayPDF({ file, width, pages, setPages }) {
 
   return (
     <div className="mt-5">
-      <Document file={file} renderMode='canvas' onLoadSuccess={onDocumentLoadSuccess} options={options} loading={<Loading />} >
+      <Document file={file} width={500} onLoadSuccess={onDocumentLoadSuccess} options={options} loading={<Loading />} >
         <div className='flex flex-wrap justify-center'>
           {pageList}
         </div>
