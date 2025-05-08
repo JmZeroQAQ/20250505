@@ -1,6 +1,7 @@
 'use client';
 
 import { pdfjs, Document, Page } from 'react-pdf';
+import rotatePDF from '../lib/rotate-pdf';
 import Loading from './Loading';
 import OperateMenu from './OperateMenu.js';
 
