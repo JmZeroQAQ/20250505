@@ -50,7 +50,7 @@ export default function Workbench() {
 
   return (
     <div>
-      {file ? <OperateMenu setFile={setFile} setPages={setPages} setWidth={setWidth} /> : getFileInput()}
+      {file ? <OperateMenu setFile={setFile} setPages={setPages} width={width} setWidth={setWidth} /> : getFileInput()}
       {file ? <DisplayPDF file={file} pages={pages} setPages={setPages} width={width} /> : ""}
       {file ? getDownload() : ""}
     </div>

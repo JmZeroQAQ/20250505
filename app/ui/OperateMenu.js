@@ -1,6 +1,6 @@
 "use client";
 
-export default function OperateMenu({ setFile, setPages, setWidth }) {
+export default function OperateMenu({ setFile, setPages, width, setWidth }) {
 
   function handleClickRotate() {
     setPages(pages => {
@@ -13,10 +13,12 @@ export default function OperateMenu({ setFile, setPages, setWidth }) {
   }
 
   function handleClickAdd() {
+    if (width >= 500) return;
     setWidth(w => w + 50)
   }
 
   function handleClickSub() {
+    if (width <= 100) return;
     setWidth(w => w - 50)
   }
 
@@ -26,6 +28,7 @@ export default function OperateMenu({ setFile, setPages, setWidth }) {
       <button className="p-2 cursor-pointer font-semibold bg-black text-white rounded" onClick={handleClickRemove}>Remove PDF</button>
       <button
         onClick={handleClickAdd}
+        disabled={width >= 500}
         className="shadow rounded-full cursor-pointer p-2 flex items-center justify-center hover:scale-105 grow-0 shrink-0 disabled:opacity-50 !bg-white"
         aria-label="Zoom in"
         data-microtip-position="top"
@@ -48,6 +51,7 @@ export default function OperateMenu({ setFile, setPages, setWidth }) {
       </button>
       <button
         onClick={handleClickSub}
+        disabled={width <= 100}
         className="shadow rounded-full cursor-pointer p-2 flex items-center justify-center hover:scale-105 grow-0 shrink-0 disabled:opacity-50 !bg-white"
         aria-label="Zoom out"
         data-microtip-position="top"

@@ -1,6 +1,7 @@
 'use client';
 
 import { pdfjs, Document, Page } from 'react-pdf';
+import Loading from './Loading';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
@@ -23,16 +24,17 @@ export default function DisplayPDF({ file, width, pages, setPages }) {
 
   const pageList = pages.map((rotate, idx) => {
     return (
-      <div className='m-3 relative flex-none cursor-pointer select-none' onClick={() => handleClick(idx)} key={`page_${idx + 1}`}>
+      <div style={{ width: width }} className='m-3 relative flex-none cursor-pointer select-none' onClick={() => handleClick(idx)} key={`page_${idx + 1}`}>
         <div className='overflow-hidden transition-transform'>
           <div className='flex flex-col justify-between items-center shadow-md p-3 bg-white hover:bg-gray-50'>
             <Page
-              className={`rotate-${rotate} transition duration-150 ease-in-out`}
+              className={`diy-rotate-${rotate} transition duration-150 ease-in-out`}
               pageNumber={idx + 1}
               renderMode='canvas'
               renderTextLayer={false}
               renderAnnotationLayer={false}
               width={width}
+              loading={""}
             />
             <div className='text-center shrink-0 text-xs italic overflow-hidden text-ellipsis whitespace-nowrap'>{idx + 1}</div>
           </div>
@@ -44,7 +46,7 @@ export default function DisplayPDF({ file, width, pages, setPages }) {
 
   return (
     <div className="mt-5">
-      <Document file={file} renderMode='canvas' onLoadSuccess={onDocumentLoadSuccess} options={options}>
+      <Document file={file} renderMode='canvas' onLoadSuccess={onDocumentLoadSuccess} options={options} loading={<Loading />} >
         <div className='flex flex-wrap justify-center'>
           {pageList}
         </div>

@@ -1,2 +1,17 @@
 @import "tailwindcss";
 
+.diy-rotate-0 {
+  transform: rotate(0deg);
+}
+
+.diy-rotate-90 {
+  transform: rotate(90deg);
+}
+
+.diy-rotate-180 {
+  transform: rotate(180deg);
+}
+
+.diy-rotate-270 {
+  transform: rotate(270deg);
+}
