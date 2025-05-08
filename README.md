@@ -9,4 +9,6 @@ pnpm dev
 
 ### 介绍
 
-PDF显示使用`React-pdf`包，修改使用`pdf-lib`包.
+[效果展示](https://20250505-two.vercel.app/)
+
+项目显示PDF使用的`React-pdf`包，修改PDF使用的是`pdf-lib`包，SEO策略是使用语义化标签和为页面添加`metadata`，为了快速实现效果，代码写的有点Toy，请见谅。
